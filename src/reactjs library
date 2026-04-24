@@ -1,0 +1,78 @@
+/* ===============================
+📦 THIRD PARTY LIB IMPORTS
+================================ */
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+import { toast } from "sonner";
+
+import { z } from "zod";
+
+import { useInView } from "react-intersection-observer";
+
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
+/* ===============================
+🚀 AOS (Animate On Scroll)
+================================ */
+export const initAOS = () => {
+AOS.init({
+duration: 800,
+once: true,
+easing: "ease-in-out",
+});
+};
+
+/* ===============================
+📅 DAYJS CONFIG
+================================ */
+dayjs.extend(relativeTime);
+
+export { dayjs };
+
+/* ===============================
+🔔 TOAST (SONNER)
+================================ */
+export const showSuccess = (msg) => toast.success(msg);
+export const showError = (msg) => toast.error(msg);
+export const showInfo = (msg) => toast.message(msg);
+
+/* ===============================
+✅ ZOD VALIDATION
+================================ */
+export const zod = z;
+
+// Example schema (you can extend)
+export const commonSchemas = {
+email: z.string().email(),
+password: z.string().min(6),
+};
+
+/* ===============================
+👀 INTERSECTION OBSERVER HOOK
+================================ */
+export const useLazyLoad = () => {
+const { ref, inView } = useInView({
+triggerOnce: true,
+threshold: 0.1,
+});
+
+return { ref, inView };
+};
+
+/* ===============================
+⏳ SKELETON LOADER
+================================ */
+export const Loader = ({ height = 20, count = 5 }) => {
+return <Skeleton height={height} count={count} />;
+};
+
+/* ===============================
+🎯 EXPORT EVERYTHING CLEANLY
+================================ */
+// NOTE: lucide-react should be imported directly where needed
+// Example: import { User } from "lucide-react";
